@@ -9,17 +9,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=amneziawg-tools
+PKG_VERSION:=0.0.1
+PKG_RELEASE:=1
 
-PKG_VERSION:=1.0.20240213
-PKG_RELEASE:=$(AUTORELEASE)
+PKG_SOURCE:=v$(PKG_VERSION)-kmod.tar.gz
+PKG_SOURCE_URL:=https://github.com/amnezia-vpn/amnezia-wg-tools/archive/refs/tags/
+PKG_HASH:=cc4f523f7ec171b7bb3bdd1bcf4ff2f6833364fab6cad309310a84f33eeafa9b
 
-PKG_SOURCE:=v$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/amnezia-vpn/amneziawg-tools/archive/refs/tags/
-PKG_HASH:=4bde122630c9ddb1ec013c3e958f2c613b9eea56834674dda92fcb423c6f4d10
-
+PKG_MAINTAINER:=Amnezia Admin <admin@amnezia.org>
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=COPYING
 
+PKG_BUILD_DIR=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)-kmod
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -28,24 +29,20 @@ MAKE_VARS += PLATFORM=linux
 
 define Package/amneziawg-tools
   CATEGORY:=Network
-  URL:=https://www.wireguard.com
-  MAINTAINER:=Jason A. Donenfeld <Jason@zx2c4.com>
-  TITLE:=WireGuard userspace control program (wg)
+  URL:=https://amnezia.org/
+  MAINTAINER:=Iurii Egorov <admin@amnezia.org>
+  TITLE:=AmneziaWG userspace control program (amneziawg)
   DEPENDS:= \
 	  +@BUSYBOX_CONFIG_IP \
 	  +@BUSYBOX_CONFIG_FEATURE_IP_LINK
 endef
 
 define Package/amneziawg-tools/description
-  WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
-  state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
-  more useful than IPSec, while avoiding the massive headache. It intends to
-  be considerably more performant than OpenVPN.  WireGuard is designed as a
-  general purpose VPN for running on embedded interfaces and super computers
-  alike, fit for many different circumstances. It uses UDP.
+  Amnezia VPN — simple and free app to run a self-hosted VPN with
+	high privacy requirements.
 
-  This package provides the userspace control program for WireGuard,
-  `wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+  This package provides the userspace control program for AmneziaWG,
+  `amneziawg`, a netifd protocol helper, and a re-resolve watchdog script.
 endef
 
 define Package/amneziawg-tools/install
